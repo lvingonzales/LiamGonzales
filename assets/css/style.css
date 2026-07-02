@@ -1,0 +1,23 @@
+:root {
+  --base-color: #323232;
+}
+
+body {
+  height: 100vh;
+  margin: 0px;
+  background-image: linear-gradient(348deg, #fff 50%, var(--base-color) 50.1%);
+  background-size: 200% 200%;
+  background-position: 100% 100%;
+  transition: background-position 1.5s 0.6s cubic-bezier(0, 0, 0.2, 1);
+
+  &.is-loaded {
+    background-position: 0% 0%;
+  }
+}
+
+.large {
+  font-size: 2.5rem;
+  @media only screen and (max-width: 800px) {
+    font-size: 2rem;
+  }
+}

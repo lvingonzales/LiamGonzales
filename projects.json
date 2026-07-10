@@ -1,0 +1,12 @@
+{
+  "projects": [
+    {
+      "id": "highness-global",
+      "name": "Highness Global",
+      "desc": "A full redesign of the Highness Global flagship website. A bespoke portfolio site that highlights the various artworks of Highness' clients through high quality speed optimized images and videos.",
+      "link": "https://highnessglobal.com/",
+      "videoMobile": "assets/videos/highnessglobal/highnessglobal-mobile.webm",
+      "videoDesktop": "assets/videos/highnessglobal/highnessglobal-desktop.webm"
+    }
+  ]
+}

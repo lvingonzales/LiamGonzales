@@ -45,6 +45,7 @@ section {
   /* background-color: #fff; */
   padding-block: 1rem;
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
@@ -152,6 +153,10 @@ body.is-loaded #header {
 
 #projects {
   padding-inline: 0px;
+}
+
+#projects .project-container .project-bg-container video {
+  width: 100%;
 }
 
 .large {

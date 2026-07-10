@@ -1,70 +1,131 @@
-// window load listener for backdrop sweep effect and value initialization
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const numOfSection = 3;
+let introTl = gsap.timeline({
+  onComplete: initSectionAnimations
+});
+
+introTl.to("body .background", {duration: 1, delay: 0.5, backgroundPosition: "0% 0%", ease: "power3.out"})
+.to("#header .text-container *", {duration: 0.8, x: 0, opacity: 1, stagger: 0.1, ease: "power3.out"})
+.to("#header #status span", {duration: 0.8, x: 0, opacity: 1, ease: "power3.out"}, "<")
+.to("#header #status .indicator", {duration: 0.5, delay: 0.3, scale: 1, ease: "power3.out"}, "<");
+
+function initSectionAnimations() {
+  document.fonts.ready.then(() => {
+
+    gsap.set(".split-text", {autoAlpha: 1});
+
+    let sections = gsap.utils.toArray("section");
+
+    sections.forEach((section) => {
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 30%",
+          end: "bottom 90%",
+          toggleActions: "play reverse play reverse",
+        }
+      });
+
+      if (section.id === "intro") {
+        const introTitle = section.querySelector(".intro.split-text.title");
+        const introDescription = section.querySelector(".intro.split-text.description");
+
+        SplitText.create(introTitle,
+          {
+            type: "words",
+            mask: "words",
+            autoSplit: true,
+            onSplit(self) {
+              let anim = gsap.from(self.words, {
+                duration: 0.6,
+                yPercent: -100,
+                autoAlpha: 0,
+                stagger: 0.1,
+                ease: "power3.out",
+              });
+              tl.add(anim, 0);
+              return anim;
+            }
+          }
+        );
+
+        SplitText.create(introDescription,
+          {
+            type: "lines",
+            mask: "lines",
+            autoSplit: true,
+            onSplit(self) {
+              let anim = gsap.from(self.lines, {
+                duration: 0.6,
+                yPercent: -100,
+                autoAlpha: 0,
+                stagger: 0.1,
+                ease: "power3.out",
+              });
+              tl.add(anim, "<");
+              ScrollTrigger.refresh();
+              return anim;
+            }
+          }
+        );
+
+        gsap.set(section.querySelectorAll("#intro #stack-list .stack-item"), {autoAlpha: 1});
+
+        tl.add(gsap.from(section.querySelectorAll("#intro #stack-list .stack-item"), {
+          duration: 0.6,
+          yPercent: -100,
+          autoAlpha: 0,
+          stagger: 0.125,
+          ease: "power3.out",
+        }), "<");
+      } else if (section.id === "about") {
+        const aboutTitle = section.querySelector(".about.split-text.title");
+        const aboutDescriptions = section.querySelectorAll(".about.split-text.description");
+
+        SplitText.create(aboutTitle,
+          {
+            type: "lines, chars",
+            autoSplit: true,
+            onSplit(self) {
+              let anim = gsap.from(self.chars, {
+                duration: 0.6,
+                autoAlpha: .25,
+                stagger: 0.1,
+                ease: "power3.out",
+              });
+              tl.add(anim, 0);
+              return anim;
+            }
+          }
+        );
+
+        aboutDescriptions.forEach((description) => {
+          SplitText.create(description,
+            {
+              type: "lines, chars",
+              autoSplit: true,
+              onSplit(self) {
+                let anim = gsap.from(self.chars, {
+                  duration: 0.8,
+                  autoAlpha: 0.25,
+                  stagger: 0.01,
+                  ease: "power3.out",
+                });
+                tl.add(anim, "<");
+                return anim;
+              }
+            }
+          )
+        })
+      }
+    })
+  })
+}
 
 window.addEventListener("load", () => {
-    let currentSection = 1;
-    const body = document.querySelector("body");
-    body.addEventListener("transitionend", () => {
-        const header = document.querySelector(".header");
-        header.classList.add("active");
-
-        header.addEventListener("transitionend", () => {
-            checkSection(currentSection, true);
-        });
-    });
-    body.classList.add("is-loaded");
+  document.fonts.ready.then(() => {
+    introTl.play();
+  });
 });
 
 
-function checkSection(currentSection, init) {
-    const prevSectionBtn = document.querySelector(".btn.prev");
-    const nextSectionBtn = document.querySelector(".btn.next");
-
-    const prevSectionLink = document.querySelector("a:has(button.prev)");
-    const nextSectionLink = document.querySelector("a:has(button.next)");
-
-    const sections = document.querySelectorAll("section");
-
-    if (init) {
-        prevSectionBtn.addEventListener("click", () => {
-            if (currentSection > 1) {
-                currentSection--;
-                checkSection(currentSection, false);
-            }
-        });
-
-        nextSectionBtn.addEventListener("click", () => {
-            if (currentSection < numOfSection) {
-                currentSection++;
-                checkSection(currentSection, false);
-            }
-        });
-    }
-
-
-    switch (currentSection) {
-        case 1:
-            prevSectionBtn.classList.remove("active");
-            nextSectionBtn.classList.add("active");
-            break;
-        case 2:
-            prevSectionBtn.classList.add("active");
-            nextSectionBtn.classList.add("active");
-            break;
-        case 3:
-            prevSectionBtn.classList.add("active");
-            nextSectionBtn.classList.remove("active");
-            break;
-    }
-
-    
-
-    sections.forEach((section) => {
-        if (parseInt(section.dataset.sectionindex) === currentSection) {
-            section.classList.add("active");
-        } else {
-            section.classList.remove("active");
-        }
-    });
-}

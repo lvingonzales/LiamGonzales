@@ -1,3 +1,4 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 /*  General   */
 :root {
   --base-color: #323232;
@@ -152,19 +153,115 @@ body.is-loaded #header {
 /* Projects */
 
 #projects {
+  position: relative;
   padding-inline: 0px;
+  gap: 1rem;
+
+  scroll-snap-type: x mandatory;
+  scroll-snap-align: start;
+}
+
+#projects .carousel-container {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  flex-direction: row;
+  justify-content: left;
+}
+
+#projects .carousel-icon-container {
+  display: flex;
+  gap: 0.25rem;
+  padding-inline: 0.5rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+
+  @media only screen and (min-width: 1024px) {
+    display: none;
+  }
+}
+
+#projects .carousel-icon-container .carousel-icon {
+  width: 100%;
+  height: 0.25rem;
+  background-image: linear-gradient(90deg, #fff 50%, #ffffff50 50%);
+  background-size: 200%;
+  background-position: 100% 0%;
+  border-radius: 99px;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+#projects .project-container {
+  position: relative;
+  scroll-snap-stop: always;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  flex-basis: 100vw;
+  height: 100dvh;
+}
+
+#projects .project-container .project-bg-container {
+  height: 100%;
+}
+
+#projects .project-container .info-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 1rem;
+}
+
+#projects .project-container .info-container .title,
+#contact .title {
+  font-family: "Anton", sans-serif;
+  font-size: 4rem;
+}
+
+#projects .project-container .info-container .desc,
+#contact .contact-email {
+  font-family: "Noto Sans", sans-serif;
+}
+
+#projects .project-container .info-container .line {
+  transform: translateY(-100%);
+}
+
+#projects .project-container .info-container .link {
+  text-decoration: none;
+  text-align: right;
+  padding-inline: 1rem;
+  opacity: 0;
+}
+
+#projects .project-container .info-container .link::after {
+  font-family: "bootstrap-icons";
+  content: "\F1C5";
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 #projects .project-container .project-bg-container video {
+  filter: blur(0.3rem) grayscale(100%) brightness(0.25);
+  height: 100%;
+  object-fit: cover;
   width: 100%;
 }
 
-.large {
-  font-size: 2.5rem;
-  font-weight: 700;
-  @media only screen and (max-width: 800px) {
-    font-size: 2rem;
-  }
+#contact .contact {
+  text-align: center;
 }
 
 .main {

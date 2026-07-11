@@ -3,10 +3,18 @@
     {
       "id": "highness-global",
       "name": "Highness Global",
-      "desc": "A full redesign of the Highness Global flagship website. A bespoke portfolio site that highlights the various artworks of Highness' clients through high quality speed optimized images and videos.",
+      "desc": "A full redesign of the Highness Global flagship website. A bespoke portfolio site that highlights the various artworks of Highness' clients through high quality images and videos optimized for speed.",
       "link": "https://highnessglobal.com/",
       "videoMobile": "assets/videos/highnessglobal/highnessglobal-mobile.webm",
       "videoDesktop": "assets/videos/highnessglobal/highnessglobal-desktop.webm"
+    },
+    {
+      "id": "highness-publishing",
+      "name": "Highness Publishing House",
+      "desc": "A full redesign of the Highness Publishing House website. A luxury E-commerce site that pushes the sales of Highness' published books and highlights its stellar network of Authors and Photographers.",
+      "link": "https://highness.art/",
+      "videoMobile": "assets/videos/highnessart/highnessart-mobile.webm",
+      "videoDesktop": "assets/videos/highnessart/highnessart-desktop.webm"
     }
   ]
 }

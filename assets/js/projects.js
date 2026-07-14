@@ -49,10 +49,11 @@ async function initProjects() {
 
       data.videoTl.to(video, {filter: 'blur(0rem) grayscale(0%) brightness(1)', duration: 3, ease: 'power3.out'})
       .to(video, {filter: 'blur(0.15rem) grayscale(0%) brightness(0.33)', duration: 1.5, delay: 1.5, ease: 'power3.out'})
-      .to(item.querySelector(".info-container .link"), {opacity: 1, duration: 1.5, ease: "power3.out"}, "<");
+      .to(item.querySelector(".info-container .link"), {opacity: 1, duration: 0.6, ease: "power3.out"}, "<");
 
       data.inactiveTl = gsap.timeline({paused: true});
-      data.inactiveTl.to(video, {filter: 'blur(0.3rem) grayscale(100%) brightness(0.25)', duration: 1.5, ease: 'power3.out'});
+      data.inactiveTl.to(video, {filter: 'blur(0.3rem) grayscale(100%) brightness(0.25)', duration: 1.5, ease: 'power3.out'})
+      .to(item.querySelector(".info-container .link"), {opacity: 0, duration: 0.6, ease: "power3.out"}, "<");
 
       SplitText.create(title, {
         type: 'lines, words',
@@ -74,7 +75,7 @@ async function initProjects() {
           data.inTitleAnim = gsap.to(self.lines,
             {
             yPercent: 200,
-            duration: 1,
+            duration: 0.8,
             ease: "power4.out"
           });
           data.inactiveTl.add(data.inTitleAnim, "<")
@@ -102,7 +103,7 @@ async function initProjects() {
 
           data.inDescAnim = gsap.to(self.lines, {
             yPercent: 200,
-            duration: 1,
+            duration: 0.8,
             ease: "power4.out"
           });
           data.inactiveTl.add(data.inDescAnim, "<")
@@ -182,13 +183,17 @@ function createProjectTemplate(project, index) {
   infoDesc.classList.add('desc');
   infoContainer.append(infoDesc);
 
+  const linkContainer = document.createElement('div');
+  linkContainer.classList.add('link-container');
+  infoContainer.append(linkContainer);
+
   const infoLink = document.createElement('a');
   infoLink.classList.add('link');
   infoLink.href = project.link;
   infoLink.rel = "noopener";
   infoLink.target = "_blank";
   infoLink.type = "button";
-  infoContainer.append(infoLink);
+  linkContainer.append(infoLink);
 
   projectContainer.append(infoContainer);
 

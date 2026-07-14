@@ -11,7 +11,6 @@ async function getProjects () {
     const data = await response.json();
 
     projects = data.projects;
-    console.log(projects);
   } catch (error) {
     console.error("FAILED TO RETRIEVE PROJECTS!");
   }
@@ -64,17 +63,19 @@ async function initProjects() {
           if(data.titleAnim) data.videoTl.remove(data.titleAnim);
           if(data.inTitleAnim) data.inactiveTl.remove(data.inTitleAnim);
 
-          data.titleAnim = gsap.to(self.lines, {
-            y: 0,
-            duration: 1.5,
-            ease: "power3.out"
+          data.titleAnim = gsap.to(self.lines, 
+            {
+            yPercent: 100,
+            duration: 1,
+            ease: "power4.out"
           });
           data.videoTl.add(data.titleAnim, "<");
 
-          data.inTitleAnim = gsap.to(self.lines, {
-            yPercent: 100,
-            duration: 1.5,
-            ease: "power3.out"
+          data.inTitleAnim = gsap.to(self.lines,
+            {
+            yPercent: 200,
+            duration: 1,
+            ease: "power4.out"
           });
           data.inactiveTl.add(data.inTitleAnim, "<")
 
@@ -93,16 +94,16 @@ async function initProjects() {
           if(data.inDescAnim) data.inactiveTl.remove(data.inDescAnim);
 
           data.descAnim = gsap.to(self.lines, {
-            y: 0,
-            duration: 1.5,
-            ease: "power3.out"
+            yPercent: 100,
+            duration: 1,
+            ease: "power4.out"
           });
           data.videoTl.add(data.descAnim, "<");
 
           data.inDescAnim = gsap.to(self.lines, {
-            yPercent: 100,
-            duration: 1.5,
-            ease: "power3.out"
+            yPercent: 200,
+            duration: 1,
+            ease: "power4.out"
           });
           data.inactiveTl.add(data.inDescAnim, "<")
 
@@ -111,7 +112,6 @@ async function initProjects() {
       });
 
       itemData.set(item, data);
-      console.log(itemData);
     })
   })
 
@@ -131,8 +131,8 @@ function resetItem(item) {
   const data = itemData.get(item);
   if (!data) return;
   data.played = false;
-  data.videoTl.pause(0);
-  data.inactiveTl.play(0);
+  data.inactiveTl.play();
+  data.videoTl.pause();
 }
 
 function createProjectTemplate(project, index) {
@@ -198,7 +198,7 @@ function createProjectTemplate(project, index) {
 let currentActive;
 let observer = null;
 let items = null;
-let mq = window.matchMedia('(min-width: 860px)');
+let mq = window.matchMedia('(min-width: 744px)');
 let itemData = new Map();
 
 function pauseAll(active) {
@@ -212,14 +212,26 @@ function pauseAll(active) {
 }
 
 function setActive(item) {
+  console.log("In Set Active Function");
   if (item === currentActive) return;
 
   const prev = currentActive;
 
   currentActive = item;
 
+  console.log("Active item:", currentActive);
+
+  if(mq.matches) {
+    if (prev) gsap.to(prev, {flex: "1 1 0", duration: 1, ease: 'power3.out'});  
+    gsap.to(item, {flex: "4 1 0", duration: 1, ease: 'power3.out'});
+
+    console.log("Animated flex of:", item);
+  }
+
   if (prev) resetItem(prev);
   playItem(item);
+
+  console.log("Play animation of", item);
 
   const video = item.querySelector('video');
   pauseAll(video);
@@ -268,11 +280,62 @@ function stopObserving() {
   }
 }
 
+function addMouseEvents(item) {
+  item.addEventListener('mouseenter', mouseEnterHandler);
+
+  item.addEventListener('mouseleave', mouseExitHandler);
+
+  item.addEventListener('click', clickHandler); 
+}
+
+function mouseEnterHandler (event){
+  const item = event.currentTarget;
+  if (currentActive === item) return;
+  const video = item.querySelector('video');
+  gsap.to(video, {filter: 'blur(0.2rem) grayscale(50%) brightness(0.5)', duration: 1, ease: 'power3.out'});
+  video.play().catch(function () {});
+}
+
+function mouseExitHandler (event) {
+  const item = event.currentTarget;
+  if (currentActive === item) return;
+  const video = item.querySelector('video');
+  gsap.to(video, {filter: 'blur(0.3rem) grayscale(100%) brightness(0.25)', duration: 1, ease: 'power3.out'});
+  video.pause();
+}
+
+function clickHandler (event) {
+  const item = event.currentTarget;
+  console.log("Clicked: ", item);
+  if (currentActive === item) return;
+  setActive(item);
+}
+
+function removeMouseEvents (item){
+  item.removeEventListener('mouseenter', mouseEnterHandler);
+  item.removeEventListener('mouseleave', mouseExitHandler);
+  item.removeEventListener('click', clickHandler);
+}
+
+function enableDesktop () {
+  items.forEach(item => {
+    addMouseEvents(item);   
+  })
+}
+
+function disableDesktop() {
+  items.forEach(item => {
+    removeMouseEvents(item);
+  })
+}
+
 function applyMode(isDesktop) {
   if (isDesktop) {
     stopObserving();
+    enableDesktop();
   }else {
     startObserving();
+    disableDesktop();
   }
 }
 

@@ -7,8 +7,8 @@
       "link": "https://highnessglobal.com/",
       "videoMobileMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Mobile.mp4",
       "videoMobileWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Mobile.webm",
-      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Deskop.mp4",
-      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Deskop.webm"
+      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Desktop.mp4",
+      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Desktop.webm"
     },
     {
       "id": "highness-publishing",
@@ -17,8 +17,8 @@
       "link": "https://highness.art/",
       "videoMobileMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Mobile.mp4",
       "videoMobileWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Mobile.webm",
-      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/highnessart-Deskop.mp4",
-      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Deskop.webm"
+      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/highnessart-Desktop.mp4",
+      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Desktop.webm"
     }
   ]
 }

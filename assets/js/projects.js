@@ -150,6 +150,8 @@ function createProjectTemplate(project, index) {
   bgVideo.controls = false;
   bgVideo.loop = true;
   bgVideo.muted = true;
+  bgVideo.setAttribute('playsinline', '');
+  bgVideo.setAttribute('webkit-playsinline', '');
   bgVideo.preload = "metadata";
 
   const videoSrcDesktopMp4 = document.createElement("source");

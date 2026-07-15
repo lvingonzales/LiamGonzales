@@ -5,16 +5,20 @@
       "name": "Highness Global",
       "desc": "A full redesign of the Highness Global flagship website. A bespoke portfolio site that highlights the various artworks of Highness' clients through high quality images and videos optimized for speed.",
       "link": "https://highnessglobal.com/",
-      "videoMobile": "assets/videos/highnessglobal/highnessglobal-mobile.webm",
-      "videoDesktop": "assets/videos/highnessglobal/highnessglobal-desktop.webm"
+      "videoMobileMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Mobile.mp4",
+      "videoMobileWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Mobile.webm",
+      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Deskop.mp4",
+      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessglobal-Deskop.webm"
     },
     {
       "id": "highness-publishing",
       "name": "Highness Publishing House",
       "desc": "A full redesign of the Highness Publishing House website. A luxury E-commerce site that pushes the sales of Highness' published books and highlights its stellar network of Authors and Photographers.",
       "link": "https://highness.art/",
-      "videoMobile": "assets/videos/highnessart/highnessart-mobile.webm",
-      "videoDesktop": "assets/videos/highnessart/highnessart-desktop.webm"
+      "videoMobileMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Mobile.mp4",
+      "videoMobileWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Mobile.webm",
+      "videoDesktopMp4": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/highnessart-Deskop.mp4",
+      "videoDesktopWebm": "https://pub-43bb7c44b7214b7e886a02103084d710.r2.dev/Highnessart-Deskop.webm"
     }
   ]
 }

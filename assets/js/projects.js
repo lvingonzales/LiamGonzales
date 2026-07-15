@@ -152,16 +152,27 @@ function createProjectTemplate(project, index) {
   bgVideo.muted = true;
   bgVideo.preload = "metadata";
 
-  const videoSrcDesktop = document.createElement("source");
-  videoSrcDesktop.src = window.location.href + project.videoDesktop;
-  videoSrcDesktop.type = "video/mp4";
-  videoSrcDesktop.media = "(min-width: 1024px)"
-  bgVideo.append(videoSrcDesktop);
+  const videoSrcDesktopMp4 = document.createElement("source");
+  videoSrcDesktopMp4.src = project.videoDesktopMp4;
+  videoSrcDesktopMp4.type = "video/mp4";
+  videoSrcDesktopMp4.media = "(min-width: 1024px)"
+  bgVideo.append(videoSrcDesktopMp4);
 
-  const videoSrcMobile = document.createElement("source");
-  videoSrcMobile.src = window.location.href + project.videoMobile;
-  videoSrcMobile.type = "video/mp4";
-  bgVideo.append(videoSrcMobile);
+  const videoSrcDesktopWebm = document.createElement("source");
+  videoSrcDesktopWebm.src = project.videoDesktopWebm;
+  videoSrcDesktopWebm.type = "video/webm";
+  videoSrcDesktopWebm.media = "(min-width: 1024px)"
+  bgVideo.append(videoSrcDesktopWebm);
+
+  const videoSrcMobileMp4 = document.createElement("source");
+  videoSrcMobileMp4.src = project.videoMobileMp4;
+  videoSrcMobileMp4.type = "video/mp4";
+  bgVideo.append(videoSrcMobileMp4);
+
+  const videoSrcMobileWebm = document.createElement("source");
+  videoSrcMobileWebm.src = project.videoMobileWebm;
+  videoSrcMobileWebm.type = "video/webm";
+  bgVideo.append(videoSrcMobileWebm);
   
   bgContainer.append(bgVideo);
 
